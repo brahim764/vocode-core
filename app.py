@@ -1,21 +1,15 @@
-import os
-from fastapi import FastAPI, Request
-from fastapi.responses import PlainTextResponse
-from dotenv import load_dotenv
-
-load_dotenv()
+from fastapi import FastAPI, Request, Response
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"message": "Voicebot backend running."}
+
 @app.post("/twilio")
 async def twilio_webhook(request: Request):
-    # Pour debug simple, on imprime ce qu'on reçoit
-    data = await request.body()
-    print("Twilio Webhook Received:", data)
-
-    # Réponse vide attendue par Twilio pour accuser réception
-    return PlainTextResponse("<Response></Response>", media_type="text/xml")
-
-@app.get("/")
-def read_root():
-    return {"message": "Voicebot backend running."}
+    response_xml = """<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Bonjour, ici votre assistant virtuel.</Say>
+</Response>"""
+    return Response(content=response_xml, media_type="application/xml")
