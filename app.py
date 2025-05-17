@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from vocode.streaming.telephony.twilio_handler import TwilioPhoneCallHandler
+from vocode.streaming.telephony.twilio_signal import TwilioSignalHandler
 from vocode.streaming.agent.simple_agent import SimpleAgent
 from vocode.streaming.models.telephony import TwilioConfig
 from vocode.streaming.input.twilio_input import TwilioInputAudioConfig
@@ -10,9 +10,9 @@ app = FastAPI()
 
 @app.post("/twilio")
 async def twilio_webhook(request: Request):
-    handler = TwilioPhoneCallHandler(
+    handler = TwilioSignalHandler(
         agent=SimpleAgent(
-            prompt_preamble="Bonjour ! Ici la Clinique Dentaire Laurier. Souhaitez-vous prendre un rendez-vous, en modifier un, ou poser une question ?"
+            prompt_preamble="Bonjour, ici la Clinique Dentaire Laurier. Voulez-vous prendre un rendez-vous, en modifier un ou poser une question ?"
         ),
         twilio_config=TwilioConfig(
             account_sid=os.environ["TWILIO_ACCOUNT_SID"],
