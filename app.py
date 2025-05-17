@@ -1,15 +1,18 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
+from fastapi.responses import Response
 
 app = FastAPI()
 
-@app.get("/")
-def root():
-    return {"message": "Voicebot backend running."}
-
 @app.post("/twilio")
 async def twilio_webhook(request: Request):
-    response_xml = """<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say>Bonjour, ici votre assistant virtuel.</Say>
-</Response>"""
-    return Response(content=response_xml, media_type="application/xml")
+    xml_response = """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+        <Say language="fr-FR" voice="alice">Bonjour, ici votre assistant virtuel.</Say>
+    </Response>
+    """
+    return Response(content=xml_response, media_type="application/xml")
+
+@app.get("/")
+async def root():
+    return {"message": "Voicebot backend running."}
