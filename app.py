@@ -1,16 +1,21 @@
-from fastapi import FastAPI, Request
-from vocode.streaming.telephony.server.twilio import TwilioInboundCallConfig, TwilioInboundCallHandler
 import os
+from fastapi import FastAPI, Request
+from fastapi.responses import PlainTextResponse
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
-call_handler = TwilioInboundCallHandler(
-    TwilioInboundCallConfig(
-        url=os.getenv("BASE_URL") + "/twilio",  # Exemple : https://nexttalkai-voicebot.onrender.com/twilio
-        use_speaker_embeddings=False
-    )
-)
-
 @app.post("/twilio")
-async def twilio_endpoint(request: Request):
-    return await call_handler.handle_request(request)
+async def twilio_webhook(request: Request):
+    # Pour debug simple, on imprime ce qu'on reçoit
+    data = await request.body()
+    print("Twilio Webhook Received:", data)
+
+    # Réponse vide attendue par Twilio pour accuser réception
+    return PlainTextResponse("<Response></Response>", media_type="text/xml")
+
+@app.get("/")
+def read_root():
+    return {"message": "Voicebot backend running."}
