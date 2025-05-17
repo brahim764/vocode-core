@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from vocode.streaming.telephony.signalwire_twilio_handler import TwilioSignalHandler
+from vocode.streaming.telephony.twilio_signal import TwilioSignalHandler
 from vocode.streaming.agent.simple_agent import SimpleAgent
 from vocode.streaming.output.eleven_labs_output import ElevenLabsOutputAudioConfig
 from vocode.streaming.input.twilio_input import TwilioInputAudioConfig
