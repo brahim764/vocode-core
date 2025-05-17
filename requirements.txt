@@ -2,5 +2,4 @@ fastapi
 uvicorn
 python-dotenv
 httpx
-git+https://github.com/vocodedev/vocode-python.git@main
-
+-e git+https://github.com/vocodedev/vocode-python.git@main#egg=vocode
