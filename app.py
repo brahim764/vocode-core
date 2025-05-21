@@ -5,8 +5,7 @@ app = FastAPI()
 
 @app.post("/swml")
 async def swml_handler(request: Request):
-    # Réponse statique de test
-    response = {
+    swml_script = {
         "version": "1.0.0",
         "sections": {
             "main": [
@@ -18,8 +17,8 @@ async def swml_handler(request: Request):
             ]
         }
     }
-    return JSONResponse(content=response)
+    return JSONResponse(content=swml_script)
 
 @app.get("/")
 def root():
-    return {"message": "Voicebot backend running."}
+    return {"message": "Voicebot backend is running"}
