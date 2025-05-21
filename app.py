@@ -13,10 +13,11 @@ async def swml_handler(request: Request):
                     "say": {
                         "text": "Bonjour et bienvenue chez notre clinique dentaire. Veuillez patienter."
                     }
-                ]
+                }
             ]
         }
-        return JSONResponse(content=response)
+    }
+    return JSONResponse(content=response)
 
 @app.get("/")
 def root():
