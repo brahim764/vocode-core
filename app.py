@@ -16,8 +16,7 @@ async def swml_handler(request: Request):
                 ]
             ]
         }
-    }
-    return JSONResponse(content=response)
+        return JSONResponse(content=response)
 
 @app.get("/")
 def root():
