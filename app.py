@@ -17,8 +17,9 @@ async def swml_handler(request: Request):
             ]
         }
     }
+    # FORCE application/json header
     return JSONResponse(content=swml_script, media_type="application/json")
 
 @app.get("/")
-def root():
+async def root():
     return {"message": "Voicebot backend is running"}
