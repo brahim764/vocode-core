@@ -5,6 +5,7 @@ app = FastAPI()
 
 @app.post("/swml")
 async def swml_handler(request: Request):
+    # Réponse statique de test
     response = {
         "version": "1.0.0",
         "sections": {
