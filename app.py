@@ -17,7 +17,7 @@ async def swml_handler(request: Request):
             ]
         }
     }
-    return JSONResponse(content=swml_script)
+    return JSONResponse(content=swml_script, media_type="application/json")
 
 @app.get("/")
 def root():
